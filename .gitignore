@@ -1,0 +1,5 @@
+# created by virtualenv automatically
+search_engine/secret.py
+bin
+lib
+pyvenv.cfg
