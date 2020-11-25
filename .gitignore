@@ -1,6 +1,0 @@
-# created by virtualenv automatically
-search_engine/secret.py
-search_engine/__pycache__
-bin
-lib
-pyvenv.cfg
