@@ -6,9 +6,6 @@ import string
 import preprocessor as p
 from spellchecker import SpellChecker
 
-a = [{"tweetId" : "123", "tweetText" : "She became herre but (no one) is thrre there was a good dayyyy"}]
-
-
 # Reducing Length
 def reduce_lengthening(text):
     pattern = re.compile(r"(.)\1{2,}")
@@ -42,7 +39,3 @@ def preprocess(tweetText):
         cleanTweet = [snowballStemmer.stem(word) for word in cleanTweet]                    # Stemming
 
         print(f"tweetID {tweet_text['tweetId']}: {str(cleanTweet)}")
-
-
-
-preprocess(a)
