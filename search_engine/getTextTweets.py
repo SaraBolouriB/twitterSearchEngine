@@ -21,12 +21,16 @@ def textTweets(dataset_add):
         1. get all tweeterID by reader() method
         2. for each tweeterID if there is a text tweet we print it otherwise we printed "Not Found"
     '''
+    allTextTweet = []
     all_user_id = reader(dataset_add)
     for user_id in all_user_id:
         try:
             status = api.get_status(user_id["tweetId"])
             text = status.text
+            allTextTweet.append({"tweetId": tweetId["tweetId"],"tweetText": text})
             print(f"tweetID {user_id['tweetId']}: {text}")
         except:
             print(f"tweetID {user_id['tweetId']} Not Found!")
             continue
+        
+    return allTextTweet
