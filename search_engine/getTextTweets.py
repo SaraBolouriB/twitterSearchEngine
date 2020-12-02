@@ -23,6 +23,7 @@ def textTweets(dataset_add):
     '''
     allTextTweet = []
     all_user_id = reader(dataset_add)
+    all_user_id.pop(0)
     for user_id in all_user_id:
         try:
             status = api.get_status(user_id["tweetId"])
@@ -32,5 +33,5 @@ def textTweets(dataset_add):
         except:
             print(f"tweetID {user_id['tweetId']} Not Found!")
             continue
-        
+
     return allTextTweet
