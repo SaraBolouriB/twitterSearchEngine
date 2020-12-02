@@ -4,3 +4,4 @@ search_engine/__pycache__
 bin
 lib
 pyvenv.cfg
+.idea/
