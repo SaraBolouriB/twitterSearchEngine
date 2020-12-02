@@ -1,10 +1,12 @@
 import nltk
+from nltk.corpus import stopwords
+from nltk.stem import SnowballStemmer
 import re
 import string
 import preprocessor as p
 from spellchecker import SpellChecker
 
-a = [{"tweetId" : "123", "tweetText" : "Hiiiiiii (thwer@ m+sy 12 %name)) //======i+s sara **"}]
+a = [{"tweetId" : "123", "tweetText" : "She became herre but (no one) is thrre there was a good dayyyy"}]
 
 
 # Reducing Length
@@ -25,7 +27,9 @@ def correction_sent(text):
 
 def preprocess(tweetText):
     tokenizer = nltk.RegexpTokenizer(r"\w+")
-    
+    stopWords = set(stopwords.words('english'))
+    snowballStemmer = SnowballStemmer('english')
+
     for tweet_text in tweetText:
         cleanTweet = re.sub(r'\d+', '', tweet_text["tweetText"])                            # Remove Numbers
         cleanTweet = cleanTweet.lower()                                                     # Convert To LowerCase
@@ -34,7 +38,10 @@ def preprocess(tweetText):
         cleanTweet = reduce_lengthening(cleanTweet)                                         # Reduce Length
         cleanTweet = correction_sent(cleanTweet)                                            # Correct misspellings
         cleanTweet = tokenizer.tokenize(cleanTweet)                                         # Tokenize Each String
-        print(f"tweetID {tweet_text['tweetId']}: {cleanTweet}")
+        cleanTweet = [w for w in cleanTweet if w not in stopWords]                          # Remove Stop Words
+        cleanTweet = [snowballStemmer.stem(word) for word in cleanTweet]                    # Stemming
+
+        print(f"tweetID {tweet_text['tweetId']}: {str(cleanTweet)}")
 
 
 
