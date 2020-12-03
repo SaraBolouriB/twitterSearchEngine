@@ -8,4 +8,4 @@ dataset = "../dataset/test.csv"
 if __name__ == '__main__':
     print("Text of Tweet are below:")
     allTweetTexts = textTweets(dataset)
-    preprocess(allTweetTexts)
+    cleanTweetText = preprocess(allTweetTexts)
