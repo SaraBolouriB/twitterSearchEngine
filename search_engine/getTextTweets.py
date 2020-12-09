@@ -28,7 +28,7 @@ def textTweets(dataset_add):
         try:
             status = api.get_status(user_id["tweetId"])
             allTextTweet.append({"tweetId": user_id["tweetId"],"tweetText": status.text})
-            print(f"tweetID {user_id['tweetId']}: {status.text}")
+            # print(f"tweetID {user_id['tweetId']}: {status.text}")
         except:
             print(f"tweetID {user_id['tweetId']} Not Found!")
             continue

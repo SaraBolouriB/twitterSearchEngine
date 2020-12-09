@@ -43,7 +43,7 @@ def preprocess(tweetText):
         cleanTweet = tokenizer.tokenize(cleanTweet)                                         # Tokenize Each String
         cleanTweet = [w for w in cleanTweet if w not in stopWords]                          # Remove Stop Words
         cleanTweet = [snowballStemmer.stem(word) for word in cleanTweet]                    # Stemming
-        cleanTexts.append({"tweetId": tweet_text["tweetId"], "tweetText": cleanTweet})
-        print(f"tweetID {tweet_text['tweetId']}: {str(cleanTweet)}")
+        cleanTexts.append({"tweetId": tweet_text["tweetId"], "tweetText": tweet_text["tweetText"], "tweetClean": cleanTweet})
+        # print(f"tweetID {tweet_text['tweetId']}: {str(cleanTweet)}")
 
     return cleanTexts

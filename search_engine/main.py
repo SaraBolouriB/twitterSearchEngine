@@ -1,11 +1,22 @@
+import xlsxwriter
 from getTextTweets import textTweets
 from preProcessing import preprocess
 
 dataset = "../dataset/test.csv"
-
+workbook = xlsxwriter.Workbook('cleanTextOutput.xlsx')
+worksheet = workbook.add_worksheet()
+row = 0
+col = 0
 
 ## the program start here!
 if __name__ == '__main__':
-    print("Text of Tweet are below:")
     allTweetTexts = textTweets(dataset)
     cleanTweetText = preprocess(allTweetTexts)
+    print("Body of Tweet are below:")
+    for tweet in cleanTweetText:
+        worksheet.write(row, col, tweet['tweetId'])
+        worksheet.write(row, col + 1, tweet["tweetText"])
+        worksheet.write_row(row, col + 2, tweet["tweetClean"])
+        row += 1
+        print(f"TweetID: {tweet['tweetId']}\nOrginalTweet: {tweet['tweetText']}\nCleanTweet: {tweet['tweetClean']}\n=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+")
+    workbook.close()
