@@ -6,7 +6,7 @@ dataset = "../dataset/test.csv"
 
 def print_clean_data(cleanTweetText):
     '''
-        1. Saved data in excel file wiche was named "cleanTextOutput.xlsx"
+        1. Saved data in excel file witch was named "cleanTextOutput.xlsx"
         2. Print clean text
     '''
     workbook = xlsxwriter.Workbook('cleanTextOutput.xlsx')
