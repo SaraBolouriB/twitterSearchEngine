@@ -1,4 +1,5 @@
 from secret import api
+import tweepy
 
 def profile_info(tweetID):
     '''
@@ -17,5 +18,9 @@ def profile_info(tweetID):
     }
     return(user_profile)
 
-
-
+def get_userTweets(username):
+    '''
+        Get five last tweets of user whose name is keeping in screen_name variable.
+    '''
+    for status in tweepy.Cursor(api.user_timeline, screen_name=username).items(5):
+        print(status.text)
