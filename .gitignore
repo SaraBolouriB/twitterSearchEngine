@@ -6,3 +6,4 @@ lib
 pyvenv.cfg
 .idea/
 search_engine/cleanTextOutput.xlsx
+search_engine/user_behavior.xlsx
