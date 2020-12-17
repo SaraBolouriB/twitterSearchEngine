@@ -1,6 +1,7 @@
 from secret import api
 import csv
 
+all_user_id = []
 
 def reader(address):
     '''
@@ -8,7 +9,7 @@ def reader(address):
         2. saved just tweeterID in "all_user_id" list
         3. return "all_user_id"
     '''
-    all_user_id = []
+
     with open(address, 'r', encoding="utf8") as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         for user_id in csv_reader:
