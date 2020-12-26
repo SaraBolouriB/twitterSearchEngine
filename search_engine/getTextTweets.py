@@ -31,7 +31,7 @@ def textTweets(dataset_add):
             allTextTweet.append({"tweetId": user_id["tweetId"],"tweetText": status.text})
             # print(f"tweetID {user_id['tweetId']}: {status.text}")
         except:
-            print(f"tweetID {user_id['tweetId']} Not Found!")
+            allTextTweet.append({"tweetId": user_id["tweetId"], "tweetText": "Not Found!"})
             continue
 
     return allTextTweet

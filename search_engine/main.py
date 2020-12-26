@@ -10,7 +10,7 @@ def print_clean_data(cleanTweetText):
         1. Saved data in excel file witch was named "cleanTextOutput.xlsx"
         2. Print clean text
     '''
-    workbook = xlsxwriter.Workbook('cleanTextOutput.xlsx')
+    workbook = xlsxwriter.Workbook('./Output/cleanTextOutput.xlsx')
     worksheet = workbook.add_worksheet()
     row = 0
     col = 0
@@ -18,7 +18,6 @@ def print_clean_data(cleanTweetText):
     worksheet.write(row, col + 1, "Tweet Text")
     worksheet.write(row, col + 2, "Cleaned Tweet Text")
     row += 1
-    print("Body of Tweet are below:")
     for tweet in cleanTweetText:
         worksheet.write(row, col, tweet['tweetId'])
         worksheet.write(row, col + 1, tweet["tweetText"])
@@ -29,7 +28,7 @@ def print_clean_data(cleanTweetText):
 
 
 def print_user_behavior(user_behavior):
-    workbook = xlsxwriter.Workbook('user_behavior.xlsx')
+    workbook = xlsxwriter.Workbook('./Output/user_behavior.xlsx')
     worksheet = workbook.add_worksheet()
     row = 0
     col = 0
@@ -55,14 +54,16 @@ def print_user_behavior(user_behavior):
         worksheet.write(row, col + 7, user["tweets_count"])
         worksheet.write(row, col + 8, user["favorite_count"])
         worksheet.write(row, col + 9, user["retweet_count"])
-
         row += 1
+        print(f"Tweet Id: {user['tweet_id']}\nUser Id: {user['user_id']}\nUsername: {user['user_name']}\nScreen Name: {user['screen_name']}\nLocation: {user['user_location']}\nFollowers Count: {user['followers_count']}\nAccount Created At: {user['account_created_at']}\nUser Tweet Count: {user['tweets_count']}\nTweet Like: {user['favorite_count']}\nRetweet Count: {user['retweet_count']}\n=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+")
     workbook.close()
 
 ## the program start here!
 if __name__ == '__main__':
     allTweetTexts = textTweets(dataset)
     cleanTweetText = preprocess(allTweetTexts)
+    print("*************************************** Phase 2 ***************************************")
     print_clean_data(cleanTweetText)
     user_behavior = profile_info()
+    print("*************************************** Phase 3 ***************************************")
     print_user_behavior(user_behavior)

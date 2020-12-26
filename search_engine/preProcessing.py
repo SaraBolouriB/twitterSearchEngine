@@ -34,6 +34,9 @@ def preprocess(tweetText):
     snowballStemmer = SnowballStemmer('english')
 
     for tweet_text in tweetText:
+        if (tweet_text['tweetText'] == "Not Found!"):
+            cleanTexts.append({"tweetId": tweet_text["tweetId"], "tweetText": tweet_text["tweetText"], "tweetClean": "Not Found!"})
+            continue
         cleanTweet = re.sub(r'\d+', '', tweet_text["tweetText"])                            # Remove Numbers
         cleanTweet = cleanTweet.lower()                                                     # Convert To LowerCase
         cleanTweet = p.clean(cleanTweet)                                                    # Remove urls, mentions
