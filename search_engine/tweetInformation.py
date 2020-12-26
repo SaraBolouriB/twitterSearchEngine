@@ -27,14 +27,3 @@ def profile_info():
         except:
             user_profile.append({"tweet_id": user['tweetId'],"user_id": "Not Found!","user_name": "Not Found!","screen_name": "Not Found!","user_location": "Not Found!","followers_count": "Not Found!","account_created_at": "Not Found!","tweets_count": "Not Found!","favorite_count": "Not Found!","retweet_count": "Not Found!"})
     return(user_profile)
-
-def get_userTweets(username):
-    '''
-        Get five last tweets of user whose name is keeping in screen_name variable.
-    '''
-    i = 1
-    for status in tweepy.Cursor(api.user_timeline, screen_name=username).items(5):
-        user_profile.append({
-            "time_line_" + str(i): status.text
-        })
-        i = i + 1
