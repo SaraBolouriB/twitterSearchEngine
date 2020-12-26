@@ -3,6 +3,8 @@ import tweepy
 from getTextTweets import all_user_id
 
 user_profile = []
+timeline = []
+total_timeline = []
 
 def profile_info():
     '''
@@ -22,8 +24,38 @@ def profile_info():
                 "account_created_at": status.user.created_at,
                 "tweets_count": status.user.statuses_count,
                 "favorite_count": status.favorite_count,
-                "retweet_count": status.retweet_count
+                "retweet_count": status.retweet_count,
             })
+            get_user_Tweets(user, status.user.screen_name)
         except:
-            user_profile.append({"tweet_id": user['tweetId'],"user_id": "Not Found!","user_name": "Not Found!","screen_name": "Not Found!","user_location": "Not Found!","followers_count": "Not Found!","account_created_at": "Not Found!","tweets_count": "Not Found!","favorite_count": "Not Found!","retweet_count": "Not Found!"})
-    return(user_profile)
+            user_profile.append({
+                "tweet_id": user['tweetId'],
+                "user_id": "Not Found!",
+                "user_name": "Not Found!",
+                "screen_name": "Not Found!",
+                "user_location": "Not Found!",
+                "followers_count": "Not Found!",
+                "account_created_at": "Not Found!",
+                "tweets_count": "Not Found!",
+                "favorite_count": "Not Found!",
+                "retweet_count": "Not Found!",
+            })
+    return user_profile, total_timeline
+
+def get_user_Tweets(user, screen_name):
+    '''
+        Get five last tweets of user whose name is keeping in screen_name variable.
+    '''
+    i = 1
+    for status in tweepy.Cursor(api.user_timeline, screen_name=screen_name).items(5):
+        timeline.append({f"timeline{i}":status.text})
+        i += 1
+    total_timeline.append({
+        "tweet_id": user['tweetId'],
+        "timeline1": timeline[0],
+        "timeline2": timeline[1],
+        "timeline3": timeline[2],
+        "timeline4": timeline[3],
+        "timeline5": timeline[4],
+    })
+    timeline.clear()
