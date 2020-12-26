@@ -12,7 +12,18 @@ def profile_info():
     for user in all_user_id:
         try:
             status = api.get_status(int(user['tweetId']))
-            user_profile.append({"tweet_id": user['tweetId'],"user_id": status.user.id,"user_name": status.user.name,"screen_name": status.user.screen_name,"user_location": status.user.location,"followers_count": status.user.followers_count,"account_created_at": status.user.created_at,"tweets_count": status.user.statuses_count,"favorite_count": status.favorite_count,"retweet_count": status.retweet_count})
+            user_profile.append({
+                "tweet_id": user['tweetId'],
+                "user_id": status.user.id,
+                "user_name": status.user.name,
+                "screen_name": status.user.screen_name,
+                "user_location": status.user.location,
+                "followers_count": status.user.followers_count,
+                "account_created_at": status.user.created_at,
+                "tweets_count": status.user.statuses_count,
+                "favorite_count": status.favorite_count,
+                "retweet_count": status.retweet_count
+            })
         except:
             print("The id " + str(user['tweetId']) + " does't exist.")
     return(user_profile)
