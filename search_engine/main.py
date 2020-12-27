@@ -29,7 +29,8 @@ def print_clean_data(cleanTweetText):
     workbook.close()
 
 
-def print_user_behavior(user_behavior):
+def print_user_behavior(user_behavior, user_timeline):
+
     workbook = xlsxwriter.Workbook('./Output/user_behavior.xlsx')
     worksheet = workbook.add_worksheet()
     row = 0
@@ -45,6 +46,7 @@ def print_user_behavior(user_behavior):
     worksheet.write(row, col + 8, "Tweet Like")
     worksheet.write(row, col + 9, "Retweet Count")
     row += 1
+    index = 0
     for user in user_behavior:
         worksheet.write(row, col, user['tweet_id'])
         worksheet.write(row, col + 1, user["user_id"])
@@ -57,7 +59,12 @@ def print_user_behavior(user_behavior):
         worksheet.write(row, col + 8, user["favorite_count"])
         worksheet.write(row, col + 9, user["retweet_count"])
         row += 1
-        print(f"Tweet Id: {user['tweet_id']}\nUser Id: {user['user_id']}\nUsername: {user['user_name']}\nScreen Name: {user['screen_name']}\nLocation: {user['user_location']}\nFollowers Count: {user['followers_count']}\nAccount Created At: {user['account_created_at']}\nUser Tweet Count: {user['tweets_count']}\nTweet Like: {user['favorite_count']}\nRetweet Count: {user['retweet_count']}\n=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+")
+        print(f"Tweet Id: {user['tweet_id']}\nUser Id: {user['user_id']}\nUsername: {user['user_name']}\nScreen Name: {user['screen_name']}\nLocation: {user['user_location']}\nFollowers Count: {user['followers_count']}\nAccount Created At: {user['account_created_at']}\nUser Tweet Count: {user['tweets_count']}\nTweet Like: {user['favorite_count']}\nRetweet Count: {user['retweet_count']}")
+        timeline = user_timeline[index]
+        if timeline['tweet_id'] == user['tweet_id']:
+            print(f"Tweet Id: {timeline['tweet_id']}\nTimeline 1: {timeline['timeline1']['timeline1']}\nTimeline 2: {timeline['timeline2']['timeline2']}\nTimeline 3: {timeline['timeline3']['timeline3']}\nTimeline 4: {timeline['timeline4']['timeline4']}\nTimeline 5: {timeline['timeline5']['timeline5']}")
+            index += 1
+        print("=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+")
     workbook.close()
 
 
@@ -81,7 +88,7 @@ def print_user_timeline(user_timeline):
         worksheet.write(row, col + 4, user['timeline4']['timeline4'])
         worksheet.write(row, col + 5, user['timeline5']['timeline5'])
         row += 1
-        print(f"Tweet Id: {user['tweet_id']}\nTimeline 1: {user['timeline1']['timeline1']}\nTimeline 2: {user['timeline2']['timeline2']}\nTimeline 3: {user['timeline3']['timeline3']}\nTimeline 4: {user['timeline4']['timeline4']}\nTimeline 5: {user['timeline5']['timeline5']}\n=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+")
+        # print(f"Tweet Id: {user['tweet_id']}\nTimeline 1: {user['timeline1']['timeline1']}\nTimeline 2: {user['timeline2']['timeline2']}\nTimeline 3: {user['timeline3']['timeline3']}\nTimeline 4: {user['timeline4']['timeline4']}\nTimeline 5: {user['timeline5']['timeline5']}\n=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+")
     workbook.close()
 
 
@@ -94,6 +101,6 @@ if __name__ == '__main__':
     user_behavior = profile_info()
     print("*************************************** Phase 3 ***************************************")
     print("*************************************** User Behavior ***************************************")
-    print_user_behavior(user_behavior[0])
-    print("*************************************** User Timeline ***************************************")
+    print_user_behavior(user_behavior[0],user_behavior[1])
+    # print("*************************************** User Timeline ***************************************")
     print_user_timeline(user_behavior[1])
